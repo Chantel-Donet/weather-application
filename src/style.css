@@ -48,7 +48,7 @@ h4 {
   border-color: rgb(109, 112, 99);
 }
 
-.current-info {
+.current-info-section {
   padding-bottom: 20px;
 }
 .deg {
@@ -81,7 +81,7 @@ h4 {
   text-align: center;
   font-size: 20px;
 }
-.forecast {
+.forecast-section {
   align-content: center;
   display: block;
   margin: 10px auto;
