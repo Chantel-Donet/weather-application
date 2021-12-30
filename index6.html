@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather app</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=M+PLUS+2:wght@500&family=M+PLUS+Rounded+1c&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="src/style.css" />
+
+    <script
+      src="https://kit.fontawesome.com/33306ab767.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-dark bg-dark">
+      <div class="container navbar-container">
+        <a class="navbar-brand">Weather App</a>
+      </div>
+    </nav>
+
+    <main>
+      <div class="container">
+        <div class="row current-info">
+          <div class="col-12">
+            <div class="card border-secondary mb-3" style="max-width: 500px">
+              <div class="card-header"><h4>Forecast Finder</h4></div>
+              <div class="card-body text-secondary">
+                <form class="form-inline" id="city-search-form">
+                  <input
+                    class="form-control mr-sm-3"
+                    type="search"
+                    placeholder="Search a city"
+                    aria-label="Search"
+                    id="city-search-input"
+                  />
+                  <button
+                    class="btn btn-outline-success my-2 my-sm-0"
+                    type="submit"
+                    id="city-search-button"
+                  >
+                    Search
+                  </button>
+                </form>
+                <button class="btn btn-outline-success" id="location-button">
+                  Current Location
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 today-temp" id="current-city">
+            <h2>Johannesburg, South Africa</h2>
+          </div>
+          <div class="col-7">
+            <div id="current-date-time"></div>
+            <div class="today-temperature">
+              <span class="current-weather-icon">
+                <img src="icons/light showers.png" width="100" />
+              </span>
+
+              <span class="current-temp">
+                <span class="degrees-value">20</span
+                ><span class="deg"
+                  >°C|<a href="#" class="farenheit">°F </a></span
+                >
+              </span>
+            </div>
+          </div>
+          <div class="col-5">
+            <ul class="today-weather-conditions">
+              <li>Today's Forecast:</li>
+              <li>
+                <div class="today-temp">
+                  <span class="today-min">20</span><span class="deg">°C </span
+                  ><img
+                    src="icons/low temperature.png"
+                    class="large-temp-icon"
+                  />
+                  | <span class="today-max">21</span><span class="deg">°C </span
+                  ><img
+                    src="icons/high temperature.png"
+                    class="large-temp-icon"
+                  />
+                </div>
+              </li>
+              <li>Humidity: <span class="humidity">5</span>%</li>
+              <li>Wind: <span class="wind">6</span> km/h</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="container forecast">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-12">
+            <p>5 Day Forecast</p>
+          </div>
+        </div>
+        <div class="container forecast-table">
+          <div class="row justify-content-center align-items-center gx-5">
+            <div class="col-2">
+              <img src="icons/cloudy.png" class="std-icon" /> <br />Mon<br />
+              20°C<img
+                src="icons/low temperature.png"
+                class="temp-icon"
+              /><br />
+              21°C
+              <img src="icons/high temperature.png" class="temp-icon" />
+            </div>
+
+            <div class="col-2">
+              <img src="icons\sunnny.png" class="std-icon" /> <br />Tue<br />
+              20°C<img
+                src="icons/low temperature.png"
+                class="temp-icon"
+              /><br />20°C<img
+                src="icons/high temperature.png"
+                class="temp-icon"
+              />
+            </div>
+            <div class="col-2">
+              <img src="icons/heavy showers.png" class="std-icon" /> <br />
+              Wed<br />
+              20°C
+              <img
+                src="icons/low temperature.png"
+                class="temp-icon"
+              /><br />20°C
+              <img src="icons/high temperature.png" class="temp-icon" />
+            </div>
+            <div class="col-2">
+              <img src="icons/medium showers.png" class="std-icon" /><br />
+              Thur<br />
+              20°C
+              <img
+                src="icons/low temperature.png"
+                class="temp-icon"
+              /><br />20°C
+              <img src="icons/high temperature.png" class="temp-icon" />
+            </div>
+            <div class="col-2">
+              <img src="icons/sun partly cloudy.png" class="std-icon" /> <br />
+              Fri <br />20°C
+              <img
+                src="icons/low temperature.png"
+                class="temp-icon"
+              /><br />20°C
+              <img src="icons/high temperature.png" class="temp-icon" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <br />
+    <div class="attribution">
+      Icons made by
+      <a href="https://www.flaticon.com/authors/juicy-fish" title="juicy_fish"
+        >juicy_fish</a
+      >
+      from
+      <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+    </div>
+    <script src="src/index6.js"></script>
+  </body>
+</html>
