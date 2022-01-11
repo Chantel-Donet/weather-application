@@ -50,11 +50,15 @@ footer {
 .current-info-section {
   padding-bottom: 20px;
 }
+.current-temperature {
+  padding-top: 20px;
+}
 .deg {
   font-size: 20px;
   position: relative;
   top: -10px;
 }
+
 .today-temp {
   font-family: "M PLUS Rounded 1c", sans-serif;
   font-size: 34px;
@@ -75,6 +79,9 @@ footer {
   font-family: "M PLUS Rounded 1c", sans-serif;
   font-size: 48px;
   line-height: 1.5;
+}
+.today-weather-description {
+  text-transform: capitalize;
 }
 .current-city-label {
   text-align: center;
@@ -140,7 +147,4 @@ footer {
 }
 #location-button {
   margin-top: 10px;
-}
-#current-date-time {
-  padding-bottom: 10px;
 }

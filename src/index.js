@@ -76,9 +76,8 @@ function getResponse(response) {
   todayMaxTempValue = Math.round(todayMaxTempValue);
   let todayMinTempValue = response.data.main.temp_min;
   todayMinTempValue = Math.round(todayMinTempValue);
+  let todayWeatherDescription = response.data.weather[0].description;
   let todayHumidityValue = response.data.main.humidity;
-  console.log(todayHumidityValue);
-
   let todayWindSpeedValue = response.data.wind.speed;
   todayWindSpeedValue = todayWindSpeedValue * 3.6;
 
@@ -90,7 +89,8 @@ function getResponse(response) {
     todayMinTempValue,
     todayMaxTempValue,
     todayHumidityValue,
-    todayWindSpeedValue
+    todayWindSpeedValue,
+    todayWeatherDescription
   );
 }
 function updateToday(
@@ -99,7 +99,8 @@ function updateToday(
   todayMinTempValue,
   todayMaxTempValue,
   todayHumidityValue,
-  todayWindSpeedValue
+  todayWindSpeedValue,
+  todayWeatherDescription
 ) {
   let currentCityDisplay = document.querySelector("#current-city");
   currentCityDisplay.innerHTML = `${city}`;
@@ -109,6 +110,10 @@ function updateToday(
   todayMaxTempDisplay.innerHTML = `${todayMaxTempValue}`;
   let todayMinTempDisplay = document.querySelector(".today-min");
   todayMinTempDisplay.innerHTML = `${todayMinTempValue}`;
+  let todayWeatherDescriptionDisplay = document.querySelector(
+    ".today-weather-description"
+  );
+  todayWeatherDescriptionDisplay.innerHTML = `${todayWeatherDescription}`;
   let todayHumidityDisplay = document.querySelector(".humidity");
   todayHumidityDisplay.innerHTML = `${todayHumidityValue}`;
   let todayWindSpeedDisplay = document.querySelector(".wind");
