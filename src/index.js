@@ -100,9 +100,10 @@ function getResponse(response) {
   todayWindSpeedValue = todayWindSpeedValue * 3.6;
   todayWindSpeedValue = Math.round(todayWindSpeedValue);
   console.log(todayWindSpeedValue);
-
   let lastUpdateTimestamp = response.data.dt;
   lastUpdateTimestamp = lastUpdateTimestamp * 1000;
+  let weatherIconID = response.data.weather[0].icon;
+
   updateToday(
     city,
     currentTempValue,
@@ -113,6 +114,7 @@ function getResponse(response) {
     todayWeatherDescription
   );
   displayLastUpdateTime(lastUpdateTimestamp);
+  updateWeatherIcons(weatherIconID);
 }
 function updateToday(
   city,
@@ -171,3 +173,17 @@ function geoLocation(position) {
 
 let locationButton = document.querySelector("#location-button");
 locationButton.addEventListener("click", locationSubmit);
+
+//Weather icon updates
+
+function updateWeatherIcons(weatherIconID) {
+  let weatherIconElement = document.querySelector(".current-weather-icon");
+  if (weatherIconID === "50d" || weatherIconID === "50n") {
+    weatherIconElement.setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${weatherIconID}@2x.png`
+    );
+  } else {
+    weatherIconElement.setAttribute("src", `icons/${weatherIconID}.png`);
+  }
+}
