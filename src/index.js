@@ -36,13 +36,30 @@ function getCurrentDate(date) {
   if (minutes < 10) {
     minutes = `0${minutes}`;
   }
-  let currentDateDisplay = document.querySelector("#current-date-time");
-  currentDateDisplay.innerHTML = `${currentDay}, ${currentDate} ${currentMonth} ${year}, ${hour}:${minutes}`;
+  let currentDateDisplay = document.querySelector("#current-date");
+  currentDateDisplay.innerHTML = `${currentDay}, ${currentDate} ${currentMonth} ${year}`;
 }
 
 let now = new Date();
 getCurrentDate(now);
 
+function displayLastUpdateTime(lastUpdateTimestamp) {
+  lastUpdate = new Date(lastUpdateTimestamp);
+  console.log(lastUpdate);
+  let hour = lastUpdate.getHours();
+  if (hour < 10) {
+    hour = `0${hour}`;
+  }
+
+  let minutes = lastUpdate.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  lastUpdate = `${hour}:${minutes}`;
+  console.log(lastUpdate);
+  lastUpdateTimeDisplay = document.querySelector("#last-uptime-time");
+  lastUpdateTimeDisplay.innerHTML = `Last updated at ${lastUpdate}`;
+}
 //search form actions - Search for a city and send to API
 function searchCity(event) {
   event.preventDefault();
@@ -81,9 +98,11 @@ function getResponse(response) {
   let todayWindSpeedValue = response.data.wind.speed;
   console.log(todayWindSpeedValue);
   todayWindSpeedValue = todayWindSpeedValue * 3.6;
-
   todayWindSpeedValue = Math.round(todayWindSpeedValue);
   console.log(todayWindSpeedValue);
+
+  let lastUpdateTimestamp = response.data.dt;
+  lastUpdateTimestamp = lastUpdateTimestamp * 1000;
   updateToday(
     city,
     currentTempValue,
@@ -93,6 +112,7 @@ function getResponse(response) {
     todayWindSpeedValue,
     todayWeatherDescription
   );
+  displayLastUpdateTime(lastUpdateTimestamp);
 }
 function updateToday(
   city,
