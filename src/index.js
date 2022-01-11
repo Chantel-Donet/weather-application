@@ -79,6 +79,7 @@ function getResponse(response) {
   let todayWeatherDescription = response.data.weather[0].description;
   let todayHumidityValue = response.data.main.humidity;
   let todayWindSpeedValue = response.data.wind.speed;
+  console.log(todayWindSpeedValue);
   todayWindSpeedValue = todayWindSpeedValue * 3.6;
 
   todayWindSpeedValue = Math.round(todayWindSpeedValue);
@@ -117,7 +118,7 @@ function updateToday(
   let todayHumidityDisplay = document.querySelector(".humidity");
   todayHumidityDisplay.innerHTML = `${todayHumidityValue}`;
   let todayWindSpeedDisplay = document.querySelector(".wind");
-  todayWindSpeedDisplay = `${todayWindSpeedValue}`;
+  todayWindSpeedDisplay.innerHTML = `${todayWindSpeedValue}`;
 }
 
 //Weather api calls - get current Weather
