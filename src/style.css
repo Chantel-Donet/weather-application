@@ -38,7 +38,6 @@ footer {
 .btn {
   color: rgb(178, 184, 163);
   border-color: whitesmoke;
-  margin-right: 2px;
 }
 .btn:hover {
   background-color: rgb(119, 122, 107);
@@ -47,6 +46,9 @@ footer {
 
 .current-temperature {
   padding-top: 20px;
+}
+.temperature-value {
+  vertical-align: middle;
 }
 .deg {
   font-size: 20px;
@@ -68,7 +70,7 @@ footer {
   padding: 10px 5px;
 }
 .current-weather-icon {
-  text-align: center;
+  padding: 8px;
 }
 .today-weather-conditions {
   padding-left: 5px;

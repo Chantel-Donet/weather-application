@@ -1,3 +1,6 @@
+//default load city = Johannesburg
+let city = "Johannesburg";
+callApiCity(city);
 //date functions - get current date and last update time, display date and update time
 function getCurrentDate(date) {
   let days = [
@@ -114,7 +117,7 @@ function updateToday(
 ) {
   let currentCityDisplay = document.querySelector("#current-city");
   currentCityDisplay.innerHTML = `${city}`;
-  let currentTempDisplay = document.querySelector(".degrees-value");
+  let currentTempDisplay = document.querySelector(".temperature-value");
   currentTempDisplay.innerHTML = `${currentTempValue}`;
   let todayMaxTempDisplay = document.querySelector(".today-max");
   todayMaxTempDisplay.innerHTML = `${todayMaxTempValue}`;
@@ -180,7 +183,7 @@ function convertFarenheit(event) {
   event.preventDefault();
   celciusLink.classList.remove("active");
   farenheitLink.classList.add("active");
-  let temperatureDisplay = document.querySelector(".degrees-value");
+  let temperatureDisplay = document.querySelector(".temperature-value");
   let farenheitTemperatureValue = celciusTemperatureValue * 1.8 + 32;
   farenheitTemperatureValue = Math.round(farenheitTemperatureValue);
   temperatureDisplay.innerHTML = `${farenheitTemperatureValue}`;
@@ -195,7 +198,7 @@ function convertCelcius(event) {
   event.preventDefault();
   celciusLink.classList.add("active");
   farenheitLink.classList.remove("active");
-  let temperatureDisplay = document.querySelector(".degrees-value");
+  let temperatureDisplay = document.querySelector(".temperature-value");
   celciusTemperatureValue = Math.round(celciusTemperatureValue);
   temperatureDisplay.innerHTML = celciusTemperatureValue;
 }
