@@ -19,9 +19,7 @@ ul {
   padding-inline-start: 5px;
   line-height: 1.2;
 }
-h4 {
-  margin: 0;
-}
+
 footer {
   text-align: center;
   color: #404040;
@@ -47,9 +45,6 @@ footer {
   border-color: rgb(109, 112, 99);
 }
 
-.current-info-section {
-  padding-bottom: 20px;
-}
 .current-temperature {
   padding-top: 20px;
 }
