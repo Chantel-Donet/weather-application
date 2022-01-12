@@ -53,7 +53,14 @@ footer {
   position: relative;
   top: -10px;
 }
-
+.active {
+  color: black;
+  cursor: default;
+}
+.active:hover {
+  color: black;
+  text-decoration: none;
+}
 .today-temp {
   font-family: "M PLUS Rounded 1c", sans-serif;
   font-size: 34px;

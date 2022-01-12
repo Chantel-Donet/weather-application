@@ -1,4 +1,4 @@
-//date functions - get current date and time to display
+//date functions - get current date and last update time, display date and update time
 function getCurrentDate(date) {
   let days = [
     "Sunday",
@@ -70,19 +70,6 @@ function searchCity(event) {
 let searchForm = document.querySelector("#city-search-form");
 searchForm.addEventListener("submit", searchCity);
 
-/*
-function showWeather(event) {
-  let celciusTemperature = document.querySelector(".degrees-value");
-  let farenheitTemperatureValue = 20 * 1.8 + 32;
-  celciusTemperature.innerHTML = `${farenheitTemperatureValue}`;
-}
-
-
-let farenheit = document.querySelector(".farenheit");
-farenheit.addEventListener("click", showWeather);
-console.log(document.querySelector(".farenheit")); 
-*/
-
 //api call return calculations and formatting - current weather update
 function getResponse(response) {
   console.log(response);
@@ -103,7 +90,7 @@ function getResponse(response) {
   let lastUpdateTimestamp = response.data.dt;
   lastUpdateTimestamp = lastUpdateTimestamp * 1000;
   let weatherIconID = response.data.weather[0].icon;
-
+  celciusTemperatureValue = response.data.main.temp;
   updateToday(
     city,
     currentTempValue,
@@ -187,3 +174,31 @@ function updateWeatherIcons(weatherIconID) {
     weatherIconElement.setAttribute("src", `icons/${weatherIconID}.png`);
   }
 }
+
+//celcuis to fareheit conversion
+function convertFarenheit(event) {
+  event.preventDefault();
+  celciusLink.classList.remove("active");
+  farenheitLink.classList.add("active");
+  let temperatureDisplay = document.querySelector(".degrees-value");
+  let farenheitTemperatureValue = celciusTemperatureValue * 1.8 + 32;
+  farenheitTemperatureValue = Math.round(farenheitTemperatureValue);
+  temperatureDisplay.innerHTML = `${farenheitTemperatureValue}`;
+}
+
+let farenheitLink = document.querySelector(".farenheit");
+farenheitLink.addEventListener("click", convertFarenheit);
+
+let celciusTemperatureValue = null;
+//farenheit to celcuis conversion
+function convertCelcius(event) {
+  event.preventDefault();
+  celciusLink.classList.add("active");
+  farenheitLink.classList.remove("active");
+  let temperatureDisplay = document.querySelector(".degrees-value");
+  celciusTemperatureValue = Math.round(celciusTemperatureValue);
+  temperatureDisplay.innerHTML = celciusTemperatureValue;
+}
+
+let celciusLink = document.querySelector(".celcius");
+celciusLink.addEventListener("click", convertCelcius);
