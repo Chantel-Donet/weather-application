@@ -48,7 +48,7 @@ getCurrentDate(now);
 
 function displayLastUpdateTime(lastUpdateTimestamp) {
   lastUpdate = new Date(lastUpdateTimestamp);
-  console.log(lastUpdate);
+
   let hour = lastUpdate.getHours();
   if (hour < 10) {
     hour = `0${hour}`;
@@ -59,7 +59,7 @@ function displayLastUpdateTime(lastUpdateTimestamp) {
     minutes = `0${minutes}`;
   }
   lastUpdate = `${hour}:${minutes}`;
-  console.log(lastUpdate);
+
   lastUpdateTimeDisplay = document.querySelector("#last-uptime-time");
   lastUpdateTimeDisplay.innerHTML = `Last updated at ${lastUpdate}`;
 }
@@ -75,7 +75,6 @@ searchForm.addEventListener("submit", searchCity);
 
 //api call return calculations and formatting - current weather update
 function getResponse(response) {
-  console.log(response);
   let city = response.data.name;
   let currentTempValue = response.data.main.temp;
   currentTempValue = Math.round(currentTempValue);
@@ -86,10 +85,10 @@ function getResponse(response) {
   let todayWeatherDescription = response.data.weather[0].description;
   let todayHumidityValue = response.data.main.humidity;
   let todayWindSpeedValue = response.data.wind.speed;
-  console.log(todayWindSpeedValue);
+
   todayWindSpeedValue = todayWindSpeedValue * 3.6;
   todayWindSpeedValue = Math.round(todayWindSpeedValue);
-  console.log(todayWindSpeedValue);
+
   let lastUpdateTimestamp = response.data.dt;
   lastUpdateTimestamp = lastUpdateTimestamp * 1000;
   let weatherIconID = response.data.weather[0].icon;
@@ -155,7 +154,6 @@ function locationSubmit(event) {
   navigator.geolocation.getCurrentPosition(geoLocation);
 }
 function geoLocation(position) {
-  console.log(position);
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
   callApiCoords(latitude, longitude);
