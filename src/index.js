@@ -73,8 +73,39 @@ function searchCity(event) {
 let searchForm = document.querySelector("#city-search-form");
 searchForm.addEventListener("submit", searchCity);
 
+//location button actions - get location and sent to API
+function locationSubmit(event) {
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(geoLocation);
+}
+function geoLocation(position) {
+  let latitude = position.coords.latitude;
+  let longitude = position.coords.longitude;
+  callApiCoords(latitude, longitude);
+}
+
+let locationButton = document.querySelector("#location-button");
+locationButton.addEventListener("click", locationSubmit);
+
+//Weather api calls - get current Weather
+
+function callApiCity(city) {
+  let apiKey = "063b1a129bc4b537be4d2fdc8b4f29c8";
+  let unit = "metric";
+  let weatherApi = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${unit}&appid=${apiKey}`;
+  axios.get(weatherApi).then(getResponse);
+}
+function callApiCoords(latitude, longitude) {
+  let apiKey = "063b1a129bc4b537be4d2fdc8b4f29c8";
+  let unit = "metric";
+  let weatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${unit}&appid=${apiKey}`;
+
+  axios.get(weatherApi).then(getResponse);
+}
+
 //api call return calculations and formatting - current weather update
 function getResponse(response) {
+  console.log(response);
   let city = response.data.name;
   let currentTempValue = response.data.main.temp;
   currentTempValue = Math.round(currentTempValue);
@@ -132,36 +163,29 @@ function updateToday(
   todayWindSpeedDisplay.innerHTML = `${todayWindSpeedValue}`;
 }
 
-//Weather api calls - get current Weather
+//forecast display
 
-function callApiCity(city) {
-  let apiKey = "063b1a129bc4b537be4d2fdc8b4f29c8";
-  let unit = "metric";
-  let weatherApi = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${unit}&appid=${apiKey}`;
-  axios.get(weatherApi).then(getResponse);
+function displayForecast() {
+  let forecastHTML = `<div class="row justify-content-center align-items-center gx-5">`;
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col-2">
+            <img src="icons/03d.png" class="std-icon" /> <br />${day}<br />
+            20°C<img src="icons/low temperature.png" class="temp-icon" /><br />
+            21°C
+            <img src="icons/high temperature.png" class="temp-icon" />
+          </div>
+          `;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+
+  let forecastDisplay = document.querySelector("#weather-forecast");
+
+  forecastDisplay.innerHTML = forecastHTML;
 }
-function callApiCoords(latitude, longitude) {
-  let apiKey = "063b1a129bc4b537be4d2fdc8b4f29c8";
-  let unit = "metric";
-  let weatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${unit}&appid=${apiKey}`;
-
-  axios.get(weatherApi).then(getResponse);
-}
-
-//location button actions - get location and sent to API
-function locationSubmit(event) {
-  event.preventDefault();
-  navigator.geolocation.getCurrentPosition(geoLocation);
-}
-function geoLocation(position) {
-  let latitude = position.coords.latitude;
-  let longitude = position.coords.longitude;
-  callApiCoords(latitude, longitude);
-}
-
-let locationButton = document.querySelector("#location-button");
-locationButton.addEventListener("click", locationSubmit);
-
 //Weather icon updates
 
 function updateWeatherIcons(weatherIconID) {
@@ -176,6 +200,7 @@ function updateWeatherIcons(weatherIconID) {
   }
 }
 
+displayForecast();
 //celcuis to fareheit conversion
 function convertFarenheit(event) {
   event.preventDefault();
@@ -203,28 +228,3 @@ function convertCelcius(event) {
 
 let celciusLink = document.querySelector(".celcius");
 celciusLink.addEventListener("click", convertCelcius);
-//forecast display
-
-function displayForecast() {
-  let forecastHTML = `<div class="row justify-content-center align-items-center gx-5">`;
-  let days = ["Sun", "Mon", "Tue", "Wed", "Thu"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col-2">
-            <img src="icons/03d.png" class="std-icon" /> <br />${day}<br />
-            20°C<img src="icons/low temperature.png" class="temp-icon" /><br />
-            21°C
-            <img src="icons/high temperature.png" class="temp-icon" />
-          </div>
-          `;
-  });
-
-  forecastHTML = forecastHTML + `</div>`;
-
-  let forecastDisplay = document.querySelector("#weather-forecast");
-
-  forecastDisplay.innerHTML = forecastHTML;
-}
-
-displayForecast();
