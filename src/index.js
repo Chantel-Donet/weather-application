@@ -106,6 +106,7 @@ function callApiCoords(latitude, longitude) {
 //api call return calculations and formatting - current weather update
 function getResponse(response) {
   console.log(response);
+  console.log(response.data.coord);
   let city = response.data.name;
   let currentTempValue = response.data.main.temp;
   currentTempValue = Math.round(currentTempValue);
@@ -123,7 +124,8 @@ function getResponse(response) {
   let lastUpdateTimestamp = response.data.dt;
   lastUpdateTimestamp = lastUpdateTimestamp * 1000;
   let weatherIconID = response.data.weather[0].icon;
-  celciusTemperatureValue = response.data.main.temp;
+  let celciusTemperatureValue = response.data.main.temp;
+  let coordinates = response.data.coord;
   updateToday(
     city,
     currentTempValue,
@@ -135,6 +137,7 @@ function getResponse(response) {
   );
   displayLastUpdateTime(lastUpdateTimestamp);
   updateWeatherIcons(weatherIconID);
+  callAPIOneCall(coordinates);
 }
 function updateToday(
   city,
@@ -162,13 +165,57 @@ function updateToday(
   let todayWindSpeedDisplay = document.querySelector(".wind");
   todayWindSpeedDisplay.innerHTML = `${todayWindSpeedValue}`;
 }
+//weather api call - get one call - forecast data
+
+function callAPIOneCall(coordinates) {
+  let latitude = coordinates.lat;
+  let longitude = coordinates.lon;
+  console.log(latitude);
+  console.log(longitude);
+  let apiKey = "063b1a129bc4b537be4d2fdc8b4f29c8";
+  let unit = "metric";
+  let forecastWeatherApi = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=${unit}&appid=${apiKey}`;
+  console.log(forecastWeatherApi);
+  axios.get(forecastWeatherApi).then(getForecastResponse);
+}
+function getForecastResponse(forecastResponse) {
+  console.log(forecastResponse);
+  let today = forecastResponse.data.daily[0];
+  let forecastDay1 = forecastResponse.data.daily[1];
+  let forecastDay2 = forecastResponse.data.daily[2];
+  let forecastDay3 = forecastResponse.data.daily[3];
+  let forecastDay4 = forecastResponse.data.daily[4];
+  let forecastDay5 = forecastResponse.data.daily[5];
+  console.log(forecastDay1);
+  displayForecast(
+    forecastDay1,
+    forecastDay2,
+    forecastDay3,
+    forecastDay4,
+    forecastDay5
+  );
+}
 
 //forecast display
 
-function displayForecast() {
+function displayForecast(
+  forecastDay1,
+  forecastDay2,
+  forecastDay3,
+  forecastDay4,
+  forecastDay5
+) {
   let forecastHTML = `<div class="row justify-content-center align-items-center gx-5">`;
+  let forecastDays = [
+    forecastDay1,
+    forecastDay2,
+    forecastDay3,
+    forecastDay4,
+    forecastDay5,
+  ];
+
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu"];
-  days.forEach(function (day) {
+  forecastDays.forEach(function (day) {
     forecastHTML =
       forecastHTML +
       `<div class="col-2">
