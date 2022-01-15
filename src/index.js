@@ -203,3 +203,28 @@ function convertCelcius(event) {
 
 let celciusLink = document.querySelector(".celcius");
 celciusLink.addEventListener("click", convertCelcius);
+//forecast display
+
+function displayForecast() {
+  let forecastHTML = `<div class="row justify-content-center align-items-center gx-5">`;
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col-2">
+            <img src="icons/03d.png" class="std-icon" /> <br />${day}<br />
+            20°C<img src="icons/low temperature.png" class="temp-icon" /><br />
+            21°C
+            <img src="icons/high temperature.png" class="temp-icon" />
+          </div>
+          `;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+
+  let forecastDisplay = document.querySelector("#weather-forecast");
+
+  forecastDisplay.innerHTML = forecastHTML;
+}
+
+displayForecast();
