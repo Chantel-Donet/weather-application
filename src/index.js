@@ -105,8 +105,6 @@ function callApiCoords(latitude, longitude) {
 
 //api call return calculations and formatting - current weather update
 function getResponse(response) {
-  console.log(response);
-  console.log(response.data.coord);
   let city = response.data.name;
   let currentTempValue = response.data.main.temp;
   currentTempValue = Math.round(currentTempValue);
@@ -170,58 +168,41 @@ function updateToday(
 function callAPIOneCall(coordinates) {
   let latitude = coordinates.lat;
   let longitude = coordinates.lon;
-  console.log(latitude);
-  console.log(longitude);
+
   let apiKey = "063b1a129bc4b537be4d2fdc8b4f29c8";
   let unit = "metric";
   let forecastWeatherApi = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=${unit}&appid=${apiKey}`;
-  console.log(forecastWeatherApi);
-  axios.get(forecastWeatherApi).then(getForecastResponse);
-}
-function getForecastResponse(forecastResponse) {
-  console.log(forecastResponse);
-  let today = forecastResponse.data.daily[0];
-  let forecastDay1 = forecastResponse.data.daily[1];
-  let forecastDay2 = forecastResponse.data.daily[2];
-  let forecastDay3 = forecastResponse.data.daily[3];
-  let forecastDay4 = forecastResponse.data.daily[4];
-  let forecastDay5 = forecastResponse.data.daily[5];
-  console.log(forecastDay1);
-  displayForecast(
-    forecastDay1,
-    forecastDay2,
-    forecastDay3,
-    forecastDay4,
-    forecastDay5
-  );
+
+  axios.get(forecastWeatherApi).then(displayForecast);
 }
 
 //forecast display
 
-function displayForecast(
-  forecastDay1,
-  forecastDay2,
-  forecastDay3,
-  forecastDay4,
-  forecastDay5
-) {
-  let forecastHTML = `<div class="row justify-content-center align-items-center gx-5">`;
-  let forecastDays = [
-    forecastDay1,
-    forecastDay2,
-    forecastDay3,
-    forecastDay4,
-    forecastDay5,
-  ];
+function displayForecast(forecastResponseData) {
+  function formatDays(timestamp) {
+    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    let forecastTimestamp = new Date(timestamp * 1000);
+    let forecastDays = days[forecastTimestamp.getDay()];
+    return forecastDays;
+  }
+  let forecastData = forecastResponseData.data.daily;
 
-  let days = ["Sun", "Mon", "Tue", "Wed", "Thu"];
-  forecastDays.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col-2">
-            <img src="icons/03d.png" class="std-icon" /> <br />${day}<br />
-            20°C<img src="icons/low temperature.png" class="temp-icon" /><br />
-            21°C
+  console.log(forecastData);
+  let forecastHTML = `<div class="row justify-content-center align-items-center gx-5">`;
+
+  forecastData.forEach(function (forecast, index) {
+    if (index > 0 && index < 6)
+      forecastHTML =
+        forecastHTML +
+        `<div class="col-2">
+      
+            <img src="icons/${
+              forecast.weather[0].icon
+            }.png" class="std-icon" /> <br />${formatDays(forecast.dt)}<br />
+            ${Math.round(
+              forecast.temp.max
+            )}°C<img src="icons/low temperature.png" class="temp-icon" /><br />
+            ${Math.round(forecast.temp.min)}°C
             <img src="icons/high temperature.png" class="temp-icon" />
           </div>
           `;
@@ -247,7 +228,6 @@ function updateWeatherIcons(weatherIconID) {
   }
 }
 
-displayForecast();
 //celcuis to fareheit conversion
 function convertFarenheit(event) {
   event.preventDefault();
