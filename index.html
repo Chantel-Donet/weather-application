@@ -40,6 +40,7 @@
           <div class="col-3 logo">
             <img src="icons\weather-app-logo.PNG" alt="logo" />
           </div>
+
           <div class="col-9 search-section">
             <div class="card border-secondary mb-3" style="max-width: 500px">
               <div class="card-header"><h4>Forecast Finder</h4></div>
@@ -67,12 +68,20 @@
             </div>
           </div>
 
-          <div class="col-12 today-temp" id="current-city">#</div>
-          <div class="col-5">
+          <div class="col-12 today-highlights" id="current-city">#</div>
+
+          <div class="col-5 current-conditions">
             <ul>
               <li id="current-date">#</li>
               <li id="last-uptime-time">#</li>
               <li class="today-weather-description">#</li>
+              <li>Humidity: <span class="humidity">5</span>%</li>
+              <li>Wind: <span class="wind">6</span> km/h</li>
+            </ul>
+          </div>
+
+          <div class="col-7">
+            <ul>
               <li class="current-temperature">
                 <img
                   class="current-weather-icon"
@@ -93,11 +102,13 @@
               </li>
             </ul>
           </div>
-          <div class="col-5">
+        </div>
+        <div class="row justify-content-center align-items-center">
+          <div class="col-4">
             <ul class="today-weather-conditions">
               <li>Today's Forecast:</li>
               <li>
-                <div class="today-temp">
+                <div class="today-highlights">
                   <span class="today-min">20</span><span class="deg">°C </span
                   ><img
                     src="icons/low temperature.png"
@@ -110,9 +121,6 @@
                   />
                 </div>
               </li>
-
-              <li>Humidity: <span class="humidity">5</span>%</li>
-              <li>Wind: <span class="wind">6</span> km/h</li>
             </ul>
           </div>
         </div>

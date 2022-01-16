@@ -45,7 +45,7 @@ footer {
 }
 
 .current-temperature {
-  padding-top: 20px;
+  padding: 10px 0;
 }
 .temperature-value {
   vertical-align: middle;
@@ -63,17 +63,24 @@ footer {
   color: black;
   text-decoration: none;
 }
-.today-temp {
+.today-highlights {
   font-family: "M PLUS Rounded 1c", sans-serif;
   font-size: 34px;
   line-height: 1.5;
   padding: 10px 5px;
 }
+.current-conditions {
+  color: #444444;
+}
 .current-weather-icon {
   padding: 8px;
 }
 .today-weather-conditions {
-  padding-left: 5px;
+  text-align: center;
+  border: 1px solid rgba(122, 122, 122, 0.1);
+  border-radius: 2px;
+  box-shadow: 3px 4px 10px 0px rgba(122, 122, 122, 0.74);
+  margin-top: 10px;
 }
 .std-icon {
   padding: 5px;

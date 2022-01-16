@@ -187,7 +187,6 @@ function displayForecast(forecastResponseData) {
   }
   let forecastData = forecastResponseData.data.daily;
 
-  console.log(forecastData);
   let forecastHTML = `<div class="row justify-content-center align-items-center gx-5">`;
 
   forecastData.forEach(function (forecast, index) {
