@@ -226,31 +226,3 @@ function updateWeatherIcons(weatherIconID) {
     weatherIconElement.setAttribute("src", `icons/${weatherIconID}.png`);
   }
 }
-
-//celcuis to fareheit conversion
-function convertFarenheit(event) {
-  event.preventDefault();
-  celciusLink.classList.remove("active");
-  farenheitLink.classList.add("active");
-  let temperatureDisplay = document.querySelector(".temperature-value");
-  let farenheitTemperatureValue = celciusTemperatureValue * 1.8 + 32;
-  farenheitTemperatureValue = Math.round(farenheitTemperatureValue);
-  temperatureDisplay.innerHTML = `${farenheitTemperatureValue}`;
-}
-
-let farenheitLink = document.querySelector(".farenheit");
-farenheitLink.addEventListener("click", convertFarenheit);
-
-let celciusTemperatureValue = null;
-//farenheit to celcuis conversion
-function convertCelcius(event) {
-  event.preventDefault();
-  celciusLink.classList.add("active");
-  farenheitLink.classList.remove("active");
-  let temperatureDisplay = document.querySelector(".temperature-value");
-  celciusTemperatureValue = Math.round(celciusTemperatureValue);
-  temperatureDisplay.innerHTML = celciusTemperatureValue;
-}
-
-let celciusLink = document.querySelector(".celcius");
-celciusLink.addEventListener("click", convertCelcius);
