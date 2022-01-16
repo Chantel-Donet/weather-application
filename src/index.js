@@ -193,7 +193,7 @@ function displayForecast(forecastResponseData) {
     if (index > 0 && index < 6)
       forecastHTML =
         forecastHTML +
-        `<div class="col-2">
+        `<div class="col-2 daily-forecast">
       
             <img src="icons/${
               forecast.weather[0].icon

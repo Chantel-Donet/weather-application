@@ -119,10 +119,12 @@ footer {
 .forecast-table {
   padding: 0 10px 20px 0;
 }
-.col-2 {
+.daily-forecast {
   text-align: center;
   border: 1px solid black;
   border-radius: 2px;
+  margin: 0 5px;
+  padding: 0 5px;
 }
 .form-control {
   background-color: lightgray;
@@ -130,7 +132,7 @@ footer {
 
 .large-temp-icon {
   width: 18px;
-  padding-bottom: 5px;
+  padding: 5px 0;
 }
 .temp-icon {
   width: 10px;
@@ -144,8 +146,4 @@ footer {
 }
 .fa-thermometer-three-quarters {
   color: #911f27;
-}
-
-.col-2 {
-  margin: 0 5px;
 }
